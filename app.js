@@ -3,11 +3,20 @@ import { Noir } from '@noir-lang/noir_js';
 import noirjs_demo from './circuit/target/noirjs_demo.json';
 
 document.addEventListener('DOMContentLoaded', async () => {
+
+  const oracles = async (name, args) => {
+    console.log("call oracles");
+    if (name == "get_storage") {
+        Promise.resolve(["0x2"])
+    }
+    return Promise.reject("Unknown oracle");
+ }
+
   const backend = new BarretenbergBackend(noirjs_demo);
   const noir = new Noir(noirjs_demo, backend);
-  const input = { x: 1, y: 2 };
+  const input = { x: 1 };
   display('logs', 'Generating proof... ⌛');
-  const proof = await noir.generateFinalProof(input);
+  const proof = await noir.generateFinalProof(input, oracles);
   display('logs', 'Generating proof... ✅');
   display('results', proof.proof);
   display('logs', 'Verifying proof... ⌛');

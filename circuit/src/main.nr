@@ -1,10 +1,10 @@
-fn main(x: Field, y: pub Field) {
-    assert(x != y);
+fn main(x: Field) {
+    assert(x == get_test_value_wrapper());
 }
 
 #[foreign_call(get_storage)]
 unconstrained fn get_test_value() -> Field {
-    2
+    1
 }
 
 unconstrained fn get_test_value_wrapper() -> Field {
@@ -14,7 +14,7 @@ unconstrained fn get_test_value_wrapper() -> Field {
 #[test]
 fn test_main() {
     let test_value = get_test_value_wrapper();
-    main(1, test_value);
+    main(1);
     // Uncomment to make test fail
     // main(1, 1);
 }
