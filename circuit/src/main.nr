@@ -2,10 +2,8 @@ fn main(x: Field) {
     assert(x == get_test_value_wrapper());
 }
 
-#[foreign_call(get_storage)]
-unconstrained fn get_test_value() -> Field {
-    1
-}
+#[oracle(get_storage)]
+unconstrained fn get_test_value() -> Field {}
 
 unconstrained fn get_test_value_wrapper() -> Field {
     get_test_value()

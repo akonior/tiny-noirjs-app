@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const oracles = async (name, args) => {
     console.log("call oracles");
     if (name == "get_storage") {
-        Promise.resolve(["0x2"])
+        return Promise.resolve(["0x1"])
     }
     return Promise.reject("Unknown oracle");
  }
